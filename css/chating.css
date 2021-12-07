@@ -1,0 +1,130 @@
+html{
+    margin: 0;
+    padding: 0;
+}
+#sendbox {
+    margin: 1.5%;
+}
+.row {
+    margin: 0;
+    justify-content: end;
+}
+.Scroll {
+    overflow-y: scroll;
+    height: 40vh;
+    border-bottom: rgb(253, 60, 60) solid 0.5vh;
+}
+#question {
+    float: right;
+}
+.B {
+    border: solid 0.5vh rgb(253, 60, 60);
+    border-radius: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 100%;
+}
+.height2{
+    height: 40vh;
+}
+.bubbles {
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+    padding: 10px;
+    border-radius: 1vh;
+    background-color: aqua;
+    width: 20vw;
+    text-align: left;
+    font-size: 25px;
+    list-style: none;
+}
+
+.bubblesV2 {
+    margin-top: 5vh;
+    margin-bottom: 4vh;
+    padding: 10px;
+    border-radius: 1vh;
+    background-color: rgb(223, 0, 0);
+    width: 20vw;
+    font-size: 25px;
+    list-style: none;
+    text-align: left;
+}
+/* Make the image fully responsive */
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+.text-white {
+    color: white;
+    padding-bottom: 2vh;
+    padding-top: 5vh;
+}
+input {
+    width: 40vw;
+    height: 50px;
+    border:  rgb(253, 60, 60) solid 0.4vh;
+    border-radius: 5px;
+}
+button {
+    width: 8vw;
+    border:  rgb(253, 60, 60) solid 0.4vh;
+    border-radius: 5px;
+    font-size: x-large;
+    margin-left: 2vw;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  /* *{
+    margin: 0px; padding: 0px;
+} * */
+ul{
+    list-style: none;
+    margin: 0px; 
+    padding: 0px;
+}
+ul li{
+    display: inline-block;
+    clear: both;
+    padding: 20px;
+    border-radius: 30px;
+    margin-bottom: 2px;
+}
+.him{
+    background: #eee;
+    float: left;
+    margin-left: 8px;
+}
+.me{
+    float: right;
+    background: #0084ff;
+    color: #fff;
+    margin-right: 8px;
+}
+.him + .me{
+    border-bottom-right-radius: 5px;
+}
+.me + .me{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.me:last-of-type{
+    border-bottom-right-radius: 30px;
+}
