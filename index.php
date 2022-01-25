@@ -3,14 +3,51 @@
 ?>
 
 <div class="jumbotron jumbotron-fluid">
-        <!-- <img src="images/logo 1.png" alt="LyricsFlow Logo" class="logo"> -->
-        <h1>Chat with other people!</h1>
+        <h1>Forum For Sheep Skulls</h1>
       </div>
     </header>
-
-    <!-- <h3>Have you ever heard a song and thought to yourself, what are they actually singing? LyricsFlow is a site where you can lock up a lyrics by searching for it or its artist or even a line in the lyrics</h3> -->
     <div class="container">
-      <h3>Create an account or log in</h3>
+      <?php
+        if (isset($_SESSION["useruid"])) {
+          echo "<button id='myBtn'>Make post</button>";
+          if (isset($_GET['error'])) {
+            if ($_GET['error'] == 'emptypost') {
+              echo "<p>Fill in all the fields</p>";
+            }
+          }
+        }
+        else {
+          echo "<h4>Log in to make a post</h4>";
+        }
+      ?>
+      <h2>Forums:</h2>
+      <?php
+      require_once './includes/functions.inc.php';
+      require_once './includes/dbh.inc.php';
+      $result = get_all_posts($conn);
+      // print_r($result);
+      foreach ($result as $row) {
+        echo '<div class="post">
+        <div class="post-title">Title: '.$row["title"].'</div>
+        <div class="post-subject">Subject: '.$row["subject"].'</div>
+        <div class="post-content">Content: '.$row["content"].'</div>
+        <div class="post-creator">Creator: '.getuserbyId($conn, $row["usersId"]).'</div>
+      </div><br>';
+      }
+      ?>
+    </div>
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="includes/create_post.inc.php" method="post">
+          <input type="text" name="title" placeholder="Title..."><br>
+          <input type="text" name="subject" placeholder="Subject..."><br>
+          <input type="text" name="content" placeholder="Content..."><br>
+          <button type="submit" name="submit">Post</button>
+        </form>
+      </div>
+
     </div>
 
     <?php

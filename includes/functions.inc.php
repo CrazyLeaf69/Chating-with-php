@@ -173,6 +173,29 @@ function getusers($conn, $search) {
 
     mysqli_stmt_close($stmt);
 }
+function getuserbyId($conn, $id) {
+    $sql = "SELECT * FROM users WHERE usersId = ?;"; // do this with playlist
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../signup.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $id);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultData)) {
+        return $row["usersUid"];
+    }
+    else {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+}
 function message_send($conn, $message, $from, $to) {
     $sql = "INSERT INTO storage (message, from_, to_) VALUES (?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
@@ -288,6 +311,40 @@ function latest_message($conn, $usersuid, $reciever) {
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ssss", $usersuid, $reciever, $usersuid, $reciever);
+    mysqli_stmt_execute($stmt);
+
+    $rows = array();
+    $resultData = mysqli_stmt_get_result($stmt);
+    while ($row = mysqli_fetch_assoc($resultData)) {
+        $rows[] = $row;
+    }
+    return $rows;
+
+    mysqli_stmt_close($stmt);
+}
+function create_post($conn, $username, $title, $subject, $content) {
+    $id = getid($conn, $username, $username);
+    $sql = "INSERT INTO forums (usersId, title, subject, content) VALUES (?, ?, ?, ?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "isss", $id, $title, $subject, $content);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    header("location: ../index.php?");
+    exit();
+}
+function get_all_posts($conn) {
+    $sql = "SELECT * FROM `forums`";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?error=stmtfailed");
+        exit();
+    }
     mysqli_stmt_execute($stmt);
 
     $rows = array();

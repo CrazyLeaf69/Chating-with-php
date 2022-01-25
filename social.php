@@ -49,13 +49,18 @@
         require_once 'includes/functions.inc.php';
         $arrs = view_conversations($conn, $_SESSION['useruid']);
         foreach ($arrs as $arr) {
-          echo "Starter: " . $arr["conv_starter"] . " | with: " . $arr["reciever"];
           echo "<br>";
-          echo "<form action='conv.php' method='get'>
-          <input type='hidden' name='starter' value='" . $arr["conv_starter"] . "'>
-          <input type='hidden' name='reciever' value='" . $arr["reciever"] . "'>
-          <button type='submit'>go to conversation</button>
-          </form>";
+          echo "
+          <div>
+            <div class='conversation'>
+              <div class='user'>"  . $arr["reciever"] . "</div>
+              <form action='conv.php' method='get'>
+              <input type='hidden' name='starter' value='" . $arr["conv_starter"] . "'>
+              <input type='hidden' name='reciever' value='" . $arr["reciever"] . "'>
+              <button type='submit' class='conversationBtn'>go to conversation</button>
+              </form>
+            </div>
+          </div>";
         }
         // print_r(message_view($conn));
         ?>
